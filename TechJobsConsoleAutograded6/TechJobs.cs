@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace TechJobsConsoleAutograded6
 {
@@ -133,9 +134,28 @@ namespace TechJobsConsoleAutograded6
         }
 
         // TODO: complete the PrintJobs method.
+        
         public void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            string nl = Environment.NewLine;
+            string star = "*****";
+
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("No results");
+            } 
+            else
+            {
+            foreach(Dictionary<string, string> job in someJobs)
+            {
+                Console.WriteLine(nl + star);
+                foreach(KeyValuePair<string, string> item in job)
+                {
+                    Console.WriteLine(item.Key + ": " + item.Value);
+                }
+                Console.WriteLine(star);
+            } 
+            }
         }
     }
 }
