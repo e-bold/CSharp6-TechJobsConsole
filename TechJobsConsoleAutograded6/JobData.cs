@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TechJobsConsoleAutograded6
@@ -46,8 +48,30 @@ namespace TechJobsConsoleAutograded6
         {
             // load data, if not already loaded
             LoadData();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
-            return null;
+            string valueLowerCase = value.ToLower();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                bool jobAddedToList = false;
+                foreach(KeyValuePair<string, string> desc in job)
+                {
+                    string descString = desc.ToString();
+                    string descLowerCase = descString.ToLower();
+                    if(descLowerCase.Contains(valueLowerCase))
+                    {
+                        if(jobAddedToList == false)
+                        {
+                        jobs.Add(job);
+                        jobAddedToList = true;
+                        }
+                    }
+                }
+                //TODO: Make search case-insensitive
+            }
+
+            return jobs;
         }
 
         /**
@@ -64,13 +88,16 @@ namespace TechJobsConsoleAutograded6
 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
+            string valueLowerCase = value.ToLower();
+
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
+                string aValueLowerCase = aValue.ToLower();
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValueLowerCase.Contains(valueLowerCase))
                 {
                     jobs.Add(row);
                 }
